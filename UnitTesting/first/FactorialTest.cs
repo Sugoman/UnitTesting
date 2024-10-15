@@ -1,45 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestingLib.Math;
+﻿using TestingLib.Math;
 
-namespace UnitTesting
+
+namespace UnitTesting.first
 {
-    public class BasicCalcTest
+
+    public class FactorialTest
     {
         private readonly BasicCalc _calculator;
-
-        public BasicCalcTest()
+        public FactorialTest()
         {
             _calculator = new BasicCalc();
         }
 
-
         [Fact]
-        public void Add_ShouldReturnCorrectSum()
+        public void Add_ShouldReturnCorrectFactorial()
         {
-            int result = _calculator.Add(2, 3);
-            Assert.Equal(5, result);
+            long result = _calculator.Factorial(5);
+            Assert.Equal(120, result);
         }
-
 
         [Theory]
         [InlineData(2, 3, 5)]
         [InlineData(0, 0, 0)]
         [InlineData(-1, -1, -2)]
+
+
         public void Add_Theory(int a, int b, int expectedResult)
         {
             int result = _calculator.Add(a, b);
             Assert.Equal(expectedResult, result);
-        }
 
+        }
         [Fact]
         public void Divide_ShouldThrowDivideByZeroException()
         {
-            Assert.Throws<DivideByZeroException>(() => _calculator.Divide(2, 0));
+            Assert.Throws<ArgumentException>(() => _calculator.Factorial(-1));
         }
-        
     }
 }
